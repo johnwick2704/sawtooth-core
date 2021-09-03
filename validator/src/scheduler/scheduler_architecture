@@ -1,0 +1,8 @@
+Sawtooth supports both serial and parallel scheduling of transactions. The scheduler type is specified via a command line argument or as an option in the validator’s configuration file when the validator process is started. Both schedulers result in the same deterministic results and are completely interchangeable.
+
+Serial Scheduler :
+-For the serial scheduler, the dependency graph is straightforward; each transaction is dependent on the one before it. The next transaction is released only when the scheduler has received the execution results from the transaction before it.
+
+Parallel Scheduler :
+-As batches are added to the parallel scheduler, predecessor transactions are calculated for each transaction in the batch. A predecessor transaction is a transaction which must be fully executed prior to executing the transaction for which it is a predecessor.
+-Each transaction has a list of inputs and outputs; these are address declarations fields in the transaction’s header and are filled in by the client when the transaction is created. Inputs and outputs specify which locations in state are accessed or modified by the transaction. Predecessor transactions are determined using these inputs/outputs declarations.
