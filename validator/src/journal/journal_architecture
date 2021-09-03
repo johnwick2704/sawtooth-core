@@ -1,3 +1,8 @@
 -The journal is a group of validator subcomponents that work together to handle batches and proposed blocks.
 -Responsible for completing published blocks, publishing batches into blocks to extend the chain, and validating proposed blocks to determine if they should be considered for the new chain head.
 
+->The Completer initially receives the blocks and batches. It guarantees that all dependencies for the blocks and batches have been satisfied.
+->Completed batches go to the BlockPublisher for batch validation and inclusion in a block.
+->Completed blocks go to the ChainController for block validation and fork resolution.
+->The BlockCache and BlockStore provide storage for the batches and blocks being processed.
+
